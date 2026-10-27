@@ -23,3 +23,16 @@ Fetched or linked at build time (not in this repository):
 | [hactool](https://github.com/SciresM/hactool) at `1d64a83` (with explicit private title-key-file hook), including its bundled mbedTLS | Base + update BKTR merge at build time only | ISC (hactool), Apache-2.0 (mbedTLS); see fetched source LICENSE files |
 | libopus (Homebrew), linked statically | Opus audio | BSD-3-Clause |
 | libvpx (Homebrew), linked statically | VP9 movies | BSD-3-Clause |
+
+The scene HDR implementation in `games/totk/third_party/d2r_gfx/gfx/nvn/totk_hdr_compose.h`
+uses RenoDX's MIT Neutwo tone-mapping equation (Copyright 2026 Carlos Lopez) and
+references its TOTK scene/bloom, extended vanilla grading and MacLeod-Boynton hue /
+purity approach, with selected exposure, highlights, shadows, contrast and saturation
+grading controls. It is an independent Metal implementation of the scene path,
+not the Windows ReShade addon or the complete Psycho17 system.
+Source: [Souperman9/renodx at 40d764d](https://github.com/Souperman9/renodx/tree/40d764d88719ab06c8e46139b5454e7dafc8cbcc/src/games/totk),
+[Neutwo](https://github.com/Souperman9/renodx/blob/40d764d88719ab06c8e46139b5454e7dafc8cbcc/src/shaders/tonemap/neutwo.hlsl).
+License: `games/totk/third_party/d2r_gfx/gfx/nvn/LICENSE.renodx`.
+The host presentation and compatibility integration builds on the MIT contribution
+in [MacNativeGames PR #582](https://github.com/ly05010419/MacNativeGames/pull/582);
+its highlight-gain formula is not used.
