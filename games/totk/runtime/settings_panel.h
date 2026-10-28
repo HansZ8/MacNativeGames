@@ -164,15 +164,16 @@ static TOTKSettingRow *settings_hdr_parameter(int which,NSString *title){
   float f=v/1000.0f;
   if(which==TOTK_HDR_PEAK&&v==0)return settings_text("自动","Auto");
   if(which==TOTK_HDR_EXPOSURE)return [NSString stringWithFormat:@"%+.2f EV",f];
-  if(which>=TOTK_HDR_SDR_PIVOT)return [NSString stringWithFormat:@"%.0f%%",f*100];
+  if(which==TOTK_HDR_SDR_PIVOT)return [NSString stringWithFormat:@"%.2f",f];
+  if(which>TOTK_HDR_SDR_PIVOT)return [NSString stringWithFormat:@"%.0f%%",f*100];
   return [NSString stringWithFormat:which==TOTK_HDR_PEAK?@"%.0f×":@"%.2f×",f];
  };
  r.help=settings_text("拖动即时生效，停止拖动后自动保存。游戏／界面白点以屏幕当前 SDR 白为 1×，峰值受实际 EDR 余量限制。","Applies while dragging and saves after the drag. Game/UI white uses current SDR white as 1×; peak is bounded by actual EDR headroom.");
  return r;
 }
 static void settings_hdr_rows(NSMutableArray<TOTKSettingRow *> *rows){
- static const char *const zh[TOTK_HDR_PARAMETER_COUNT]={"峰值亮度","游戏白点","界面白点","曝光","高光","暗部","对比度","饱和度","Bloom 泛光","原版曲线保留","原版色相保留","原版褪色保留","原版饱和度"};
- static const char *const en[TOTK_HDR_PARAMETER_COUNT]={"Peak brightness","Game white","UI white","Exposure","Highlights","Shadows","Contrast","Saturation","Bloom","SDR blend","SDR hue","SDR blowout","Vanilla saturation"};
+ static const char *const zh[TOTK_HDR_PARAMETER_COUNT]={"峰值亮度","游戏白点","界面白点","曝光","高光","暗部","对比度","饱和度","Bloom 泛光","SDR 暗部拐点","原版色相保留","原版褪色保留","原版饱和度"};
+ static const char *const en[TOTK_HDR_PARAMETER_COUNT]={"Peak brightness","Game white","UI white","Exposure","Highlights","Shadows","Contrast","Saturation","Bloom","SDR toe pivot","SDR hue","SDR blowout","Vanilla saturation"};
  for(int i=0;i<TOTK_HDR_PARAMETER_COUNT;i++)[rows addObject:settings_hdr_parameter(i,settings_text(zh[i],en[i]))];
 }
 
